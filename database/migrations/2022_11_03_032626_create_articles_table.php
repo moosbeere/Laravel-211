@@ -16,12 +16,13 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->date('date');
             $table->string('name');
             $table->binary('preview_image');
             $table->binary('full_image');
             $table->string('shortDesc')->nullable();
             $table->string('desc'); 
-            $table->date('date');
+            
         });
     }
 
