@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>Новостной сайт</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,10 +17,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-
     <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Новости</a>
+    <a class="navbar-brand" href="#">Что-то типа новостного сайта</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,12 +29,12 @@
           <a class="nav-link active" aria-current="page" href="/about">О нас</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/contact">Контакты</a>
+          <a class="nav-link" href="#">Контакты</a>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
-        </li> -->
-        <!-- <li class="nav-item dropdown">
+        </li>
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown link
           </a>
@@ -50,13 +49,7 @@
   </div>
 </nav>
 <div class="container">
-<!-- <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-3">Fluid jumbotron</h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-  </div>
-</div> -->
-            @yield('content')
-        </div>
-  </body>
+    @yield('content');
+</div>
+</body>
 </html>
