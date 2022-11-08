@@ -1,5 +1,6 @@
-@extends('layouts.layout')
+@extends('layout.layout')
 @section('content')
-<strong>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-Eligendi dignissimos aut excepturi, aliquid, veritatis maiores reiciendis eveniet ratione debitis, sequi laboriosam? Exercitationem et provident, odit aut tenetur aliquid quisquam nostrum?</strong>
+    <p class="text-lowercase">Lowercased text.</p>
+    <p class="text-uppercase">Uppercased text.</p>
+    <p class="text-capitalize">CapiTaliZed text.</p>
 @endsection
