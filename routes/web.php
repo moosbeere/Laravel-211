@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts/layout');
+Route::get('/', [ArticleController::class, 'index']);
+Route::get('/about', function () {
+    return view('main/about');
+});
+Route::get('/contact', function () {
+    return view('main/contact');
 });
