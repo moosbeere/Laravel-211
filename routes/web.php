@@ -14,5 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main/main');
+});
+Route::get('/about', function () {
+    return view('main/about');
+});
+
+Route::get('/contact', function () {
+    $contact = [
+        'name' => 'Политех',
+        'adres' => 'Пряники',
+        'phone' => '8(495)423-2323',
+        'email' => '@mospolytech.ru',
+    ];
+    return view('main/contact', ['contact' => $contact]);
 });
