@@ -14,9 +14,13 @@ class ArticleSeeder extends Seeder
      */
     public function run()
     {
-        $article = new Article();
-        $result = json_decode(file_get_contents(public_path().'/articles.json'), true);
-        $article->fill($result);
-        $article->save();
+        
+        $results = json_decode(file_get_contents(public_path().'/articles.json'), true);
+        foreach($results as $result){
+            $article = new Article();
+            $article->fill($result);
+            $article->save();
+        }
+        
     }
 }
