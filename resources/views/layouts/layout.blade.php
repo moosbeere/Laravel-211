@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-  <body>
+  <body class="d-flex flex-column min-vh-100">
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -32,9 +32,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/contact">Контакты</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/view">Войти</a>
+        </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown link
@@ -49,14 +49,18 @@
     </div>
   </div>
 </nav>
+<main>
 <div class="container">
-<!-- <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-3">Fluid jumbotron</h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    @yield('content')
+</div>
+<!-- @yield('content') -->
+
+</main>
+  <footer class="bg-light text-center text-lg-start">
+
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    Володина О.В. Номер группы 19А-111.
   </div>
-</div> -->
-            @yield('content')
-        </div>
-  </body>
+</footer>
+</body>
 </html>

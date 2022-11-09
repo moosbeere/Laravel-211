@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts/layout');
-});
-
 Route::get('/about', function () {
     return view('main/about');
 });
@@ -24,3 +23,10 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('main/adress');
 });
+
+// Route::get('/', [ArticleController::class, 'index']);
+
+Route::get('/', [MainController::class, 'index']);
+Route::get('/galery/{full}', [MainController::class, 'show']);
+Route::get('/view', [AuthController::class, 'view']);
+Route::post('/signin', [AuthController::class, 'signin']);
