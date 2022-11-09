@@ -15,7 +15,7 @@
       <th scope="row">{{$article['date']}}</th>
       <td>{{$article['name']}}</td>
       <td>{{$article['desc']}}</td>
-      <td><img src="{{URL::asset($article['preview_image'])}}" alt="" height="100" width="100"></td>
+      <td><a href="/galery/{{$article['full_image']}}"><img src="{{URL::asset($article['preview_image'])}}" alt="" height="100" width="100"></a></td>
     </tr>
     @endforeach
   </tbody>
