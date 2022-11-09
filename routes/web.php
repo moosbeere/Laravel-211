@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArticleController;
+// use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +16,22 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
-Route::get('/', [ArticleController::class, 'index']);
+//Route::get('/', [ArticleController::class, 'index']);
+Route::get('/', [MainController::class, 'index']);
+Route::get('/galery/{full}', [MainController::class, 'show']);
+Route::get('/registration', [AuthController::class, 'index']);
+Route::post('/signin', [AuthController::class, 'create']);
+
+
 Route::get('/about', function () {
     return view('main/about');
 });
 Route::get('/contact', function () {
     $contact = [
-        'name' => 'Polytech',
-        'adres' 
-    ]
-    return view('main/contact');
+        'name' => 'Политех',
+        'adres' => 'Пряники',
+        'phone' => '8(495)432-2323',
+        'email' => '@mospolytech.ru',
+    ];
+    return view('main/contact', ['contact' => $contact]);
 });

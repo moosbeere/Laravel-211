@@ -39,18 +39,26 @@
         <li class="nav-item">
           <a class="nav-link" href="/contact">Контакты</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+       <li class="nav-item">
+          <a class="nav-link" href="/registration">Регистрация</a>
         </li>
+         <!-- 
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li> -->
       </ul>
     </div>
   </div>
-</nav>  
-<div class="container">
+</nav> 
+<main>
+  <div class="container">
     @yield('content')
-</div>     
+  </div> 
+</main> 
+  <footer class="bg-light text-center text-lg-start">
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    Студенты группы 211-322
+  </div>
+</footer>
 </body>
 </html>

@@ -5,15 +5,17 @@
     <tr>
       <th scope="col">Date</th>
       <th scope="col">Title</th>
-      <th scope="col">ShortDesc</th>
+      <th scope="col">Desc</th>
+      <th scope="col">Image</th>
     </tr>
   </thead>
   <tbody>
-    @foreach($articles as $article)
+    @foreach($results as $result)
     <tr>
-      <th scope="row">{{$article->date}}</th>
-      <td>{{$article->name}}</td>
-      <td>{{$article->shortDesc}}</td>
+      <th scope="row">{{$result['date']}}</th>
+      <td>{{$result['name']}}</td>
+      <td>{{$result['desc']}}</td>
+      <td><a href="/galery/{{$result['full_image']}}"><img src="{{URL::asset($result['preview_image'])}}" alt="" height="100" width="100"></a></td>
     </tr>
     @endforeach
 
