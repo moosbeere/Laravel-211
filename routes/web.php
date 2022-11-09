@@ -19,5 +19,9 @@ Route::get('/about', function () {
     return view('main/about');
 });
 Route::get('/contact', function () {
+    $contact = [
+        'name' => 'Polytech',
+        'adres' 
+    ]
     return view('main/contact');
 });
