@@ -17,8 +17,8 @@ class CreateArticlesTable extends Migration
             $table->id();
             $table->date('date')->default('12.10.22');
             $table->string('name');
-            $table->string('preview_image');
-            $table->string('full_image');
+            $table->string('preview_image')->nullable();
+            $table->string('full_image')->nullable();
             $table->string('shortDesc')->nullable();
             $table->string('desc');
             $table->timestamps();

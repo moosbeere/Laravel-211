@@ -31,6 +31,9 @@
           <a class="nav-link" href="contact">Контакты</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/article/create">Создать статью</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/registration">Войти</a>
         </li>
         <!-- <li class="nav-item dropdown">

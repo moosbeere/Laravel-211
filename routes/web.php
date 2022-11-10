@@ -15,6 +15,12 @@ use App\Http\Controllers\ArticleController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['prefix'=>'/article'], function(){
+    Route::get('/create', [ArticleController::class, 'create']);
+    Route::post('/store', [ArticleController::class, 'store']);
+    Route::get('/show/{id}', [ArticleController::class, 'show']);
+});
+
 
 // Route::get('/', [MainController::class, 'index']);
 Route::get('/', [ArticleController::class, 'index']);
