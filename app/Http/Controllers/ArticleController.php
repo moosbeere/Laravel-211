@@ -14,7 +14,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::latest()->paginate(5);
         return view('articles.index', ['articles' => $articles]);
     }
 
@@ -25,7 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -36,7 +36,13 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $article = new Article();
+        $article->date = request('date');
+        $article->name = request('title');
+        $article->shortDesc = request('annotation');
+        $article->desc = request('description');
+        $article->save();
+        return redirect('/');
     }
 
     /**
@@ -47,7 +53,8 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Article::FindOrFail($id);
+        return view('articles.show', ['article' => $article]);
     }
 
     /**
