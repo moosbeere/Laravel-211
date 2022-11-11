@@ -1,7 +1,8 @@
 @extends('layout.layout')
 @section('content')
-    <p class="text-uppercase">контакты</p>
-    <p class="text-capitalize">Политех</p>
-    <p class="text-lowercase">main.mospolytech.ru</p>
+    <p class="text-uppercase">{{$contact['name']}}</p>
+    <p class="text-capitalize">{{$contact['adres']}}</p>
+    <p class="text-lowercase">{{$contact['phone']}}</p>
+    <p class="text-lowercase">{{$contact['email']}}</p>
 
 @endsection

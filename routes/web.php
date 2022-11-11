@@ -20,5 +20,11 @@ Route::get('/about', function () {
     return view('main/about');
 });
 Route::get('/contact', function () {
-    return view('main/contact');
+    $contact=[
+        'name' => 'Политех',
+        'adres' => 'Пряники',
+        'phone' => '8(495)432-2323',
+        'email' => '@polytech.ru'
+    ];
+    return view('main/contact', ['contact' => $contact]);
 });
