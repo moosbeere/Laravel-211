@@ -36,6 +36,12 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'date' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
         $article = new Article();
         $article->date = request('date');
         $article->name = request('title');
@@ -65,7 +71,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::FindOrFail($id);
+        return view('articles.edit', ['article' => $article]);
     }
 
     /**
@@ -77,7 +84,19 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'date' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        $article = Article::FindOrFail($id);
+        $article->date = request('date');
+        $article->name = request('title');
+        $article->shortDesc = request('annotation');
+        $article->desc = request('description');
+        $article->save();
+        return redirect('/article/show/'.$article->id);
     }
 
     /**
@@ -88,6 +107,8 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::FindOrFail($id);
+        $article->delete();
+        return redirect('/');
     }
 }
