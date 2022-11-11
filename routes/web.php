@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,9 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-//Route::get('/', [ArticleController::class, 'index']);
-Route::get('/', [MainController::class, 'index']);
-Route::get('/galery/{full}', [MainController::class, 'show']);
+Route::get('/', [ArticleController::class, 'index']);
+// Route::get('/', [MainController::class, 'index']);
+// Route::get('/galery/{full}', [MainController::class, 'show']);
 Route::get('/registration', [AuthController::class, 'index']);
 Route::post('/signin', [AuthController::class, 'create']);
 
