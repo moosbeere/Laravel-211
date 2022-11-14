@@ -24,9 +24,15 @@ Route::get('/contact', function () {
     return view('main/adress');
 });
 
-// Route::get('/', [ArticleController::class, 'index']);
+Route::get('/', function(){
+    return redirect('/article');
+});
 
-Route::get('/', [MainController::class, 'index']);
+Route::group(['prefix' => '/article'], function(){
+    Route::get('', [ArticleController::class, 'index']);
+});
+
+// Route::get('/', [MainController::class, 'index']);
 Route::get('/galery/{full}', [MainController::class, 'show']);
 Route::get('/view', [AuthController::class, 'view']);
 Route::post('/signin', [AuthController::class, 'signin']);

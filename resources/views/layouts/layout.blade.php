@@ -20,7 +20,7 @@
 
     <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Новости</a>
+    <a class="navbar-brand" href="/article">Новости</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -33,7 +33,7 @@
           <a class="nav-link" href="/contact">Контакты</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/view">Войти</a>
+          <a class="nav-link" href="/view">Регистрация</a>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,8 +53,6 @@
 <div class="container">
     @yield('content')
 </div>
-<!-- @yield('content') -->
-
 </main>
   <footer class="bg-light text-center text-lg-start">
 
