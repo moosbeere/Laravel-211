@@ -24,12 +24,15 @@ Route::get('/contact', function () {
     return view('main/adress');
 });
 
-Route::get('/', function(){
-    return redirect('/article');
-});
+Route::get('/', [ArticleController::class, 'index']);
 
 Route::group(['prefix' => '/article'], function(){
-    Route::get('', [ArticleController::class, 'index']);
+    Route::get('create', [ArticleController::class, 'create']);
+    Route::post('store', [ArticleController::class, 'store']);
+    Route::get('show/{id}', [ArticleController::class, 'show']);
+    Route::get('edit/{id}', [ArticleController::class, 'edit']);
+    Route::post('update/{id}', [ArticleController::class, 'update']);
+    Route::get('destroy/{id}', [ArticleController::class, 'destroy']);
 });
 
 // Route::get('/', [MainController::class, 'index']);

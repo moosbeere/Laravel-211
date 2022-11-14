@@ -14,7 +14,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::paginate(5);
+        $articles = Article::latest()->paginate(5);
         return view('articles.index', ['articles' => $articles]);
     }
 
@@ -25,7 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -36,7 +36,19 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'date' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+        $article = new Article();
+        $article->date = request('date');
+        $article->date = request('date');
+        $article->name = request('title');
+        $article->shortDesc = request('annotation');
+        $article->desc = request('description');
+        $article->save();
+        return redirect('/');
     }
 
     /**
@@ -47,7 +59,8 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Article::FindOrFail($id);
+        return view('articles.show', ['article' => $article]);
     }
 
     /**
@@ -58,7 +71,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::FindOrFail($id);
+        return view('articles.edit', ['article' => $article]);
     }
 
     /**
@@ -70,7 +84,19 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'date' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        $article = Article::FindOrFail($id);
+        $article->date = request('date');
+        $article->name = request('title');
+        $article->shortDesc = request('annotation');
+        $article->desc = request('description');
+        $article->save();
+        return redirect('/article/show/'.$article->id);
     }
 
     /**
@@ -81,6 +107,8 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::FindOrFail($id);
+        $article->delete();
+        return redirect('/');
     }
 }
