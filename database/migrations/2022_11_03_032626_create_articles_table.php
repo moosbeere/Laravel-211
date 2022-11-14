@@ -18,8 +18,8 @@ class CreateArticlesTable extends Migration
             $table->timestamps();
             $table->date('date');
             $table->string('name');
-            $table->binary('preview_image');
-            $table->binary('full_image');
+            $table->binary('preview_image')->nullable();
+            $table->binary('full_image')->nullable();
             $table->string('shortDesc')->nullable();
             $table->string('desc'); 
             

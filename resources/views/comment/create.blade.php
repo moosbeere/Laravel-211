@@ -1,6 +1,5 @@
-@extends('layouts.layout')
-@section('content')
-
+@extends('article.show')
+@section('comment')
 @if($errors->any())
 <div class="alert alert-danger">
     <ul>

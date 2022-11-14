@@ -12,7 +12,7 @@
     @foreach($articles as $article)
     <tr>
       <th scope="row">{{$article->date}}</th>
-      <td><a href="/article/show/{{$article->id}}">{{$article->name}}</a></td>
+      <td><a href="/article/{{$article->id}}">{{$article->name}}</a></td>
       <td>{{$article->shortDesc}}</td>
     </tr>
     @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Models\Article;
 
 class CommentController extends Controller
 {
@@ -33,9 +34,16 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        // $article = Article::FindOrFail($id);
+        $comment = new Comment();
+        $comment->title = request('title');
+        $comment->text = request('text');
+        $comment->article()->associate($id);
+        $comment->save();
+        echo $id;
+        return redirect('/article/'.$id);
     }
 
     /**
@@ -55,9 +63,10 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit($id)
     {
-        //
+        $comment = Comment::find($id);
+        return view('comment.edit', ['comment'=> $comment]);
     }
 
     /**
@@ -67,9 +76,14 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, $id)
     {
-        //
+                $comment = Comment::find($id);
+                $comment->title = request('title');
+                $comment->text = request('text');
+                // $comment->article()->associate($comment->article_id);
+                $comment->save();
+                return redirect('/article/'.$comment->article_id);
     }
 
     /**

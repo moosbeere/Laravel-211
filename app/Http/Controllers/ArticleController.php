@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Comment;
 
 class ArticleController extends Controller
 {
@@ -60,7 +61,8 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = Article::FindOrFail($id);
-        return view('articles.show', ['article' => $article]);
+        $comments = Comment::where('article_id', $article->id)->latest()->paginate(2);
+        return view('articles.show', ['article' => $article, 'comments'=>$comments]);
     }
 
     /**
@@ -96,7 +98,7 @@ class ArticleController extends Controller
         $article->shortDesc = request('annotation');
         $article->desc = request('description');
         $article->save();
-        return redirect('/article/show/'.$article->id);
+        return redirect('/article/'.$article->id);
     }
 
     /**
