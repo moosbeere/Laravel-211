@@ -20,7 +20,7 @@
     <h5 class="card-title">{{$comment->title}}, ({{$comment->created_at}})</h5>
     <p class="card-text">{{$comment->text}}</p>
     <a href="/comment/{{$comment->id}}" class="btn btn-secondary">Редактировать</a>
-    <a href="/article/{{$article->id}}/comment/{{$comment->id}}/delete" class="btn btn-secondary">Удалить</a>
+    <a href="/comment/{{$comment->id}}/delete" class="btn btn-secondary">Удалить</a>
   </div>
   @endforeach
   {{$comments->links()}}

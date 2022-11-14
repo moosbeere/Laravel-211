@@ -94,6 +94,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect('/article/'.$comment->article_id);
     }
 }

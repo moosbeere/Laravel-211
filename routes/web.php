@@ -38,6 +38,7 @@ Route::get('/', [ArticleController::class, 'index']);
 Route::post('/comment/{id}', [CommentController::class, 'store']);
 Route::get('/comment/{id}', [CommentController::class, 'edit']);
 Route::put('/comment/{id}', [CommentController::class, 'update']);
+Route::get('/comment/{comment}/delete', [CommentController::class, 'destroy']);
 Route::resource('/article', ArticleController::class);
 
 
