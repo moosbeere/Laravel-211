@@ -15,8 +15,12 @@ use App\Http\Controllers\ArticleController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::get('/', function(){
+//     return view('welcome');
+// });
 
 Route::get('/', [ArticleController::class, 'index']);
+Route::resource('articles', ArticleController::class);
 
 // Route::get('/', [MainController::class, 'index']);
 Route::get('/galery/{full}', [MainController::class, 'galery']);
