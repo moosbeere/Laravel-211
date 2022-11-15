@@ -31,6 +31,9 @@
         <li class="nav-item">
           <a class="nav-link" href="contact">Контакты</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="auth/registr">Регистрация</a>
+        </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>

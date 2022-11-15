@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,8 @@ use App\Http\Controllers\MainController;
 
 Route::get('/', [MainController::class, 'index']);
 Route::get('/main/galery/{full}', [MainController::class, 'show']);
+Route::get('/auth/registr', [AuthController::class, 'create']);
+Route::post('/auth/store', [AuthController::class, 'store']);
 
 Route::get('/about', function () {
     return view('main.about');
