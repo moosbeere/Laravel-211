@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -24,7 +25,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +36,18 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'text' => 'required',
+        ]);
+        $article = Article::FindOrFail(request('id'));
+        $comment = new Comment();
+        $comment->title = request('title');
+        $comment->text = request('text');
+        $comment->article()->associate($article); 
+        $comment->save();
+        return redirect('/article/show/'.request('id'));
+        // $comment->title = $request->title;
     }
 
     /**
@@ -57,7 +69,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        return view('comment.edit', ['comment'=>$comment]);
     }
 
     /**
@@ -69,7 +81,14 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'text' => 'required',
+        ]);
+        $comment->title = request('title');
+        $comment->text = request('text');
+        $comment->save();
+        return redirect('/article/show/'.$comment->article_id);
     }
 
     /**
@@ -80,6 +99,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect('/article/show/'.$comment->article_id);
     }
 }

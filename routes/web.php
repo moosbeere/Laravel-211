@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::group(['prefix' => '/article'], function(){
     Route::get('/destroy/{id}', [ArticleController::class, 'destroy']);
 });
 
+Route::resource('comment', CommentController::class);
 
 
 // Route::get('/', [MainController::class, 'index']);
