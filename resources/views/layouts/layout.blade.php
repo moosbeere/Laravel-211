@@ -49,7 +49,6 @@
   </div>
 </nav>
 <main>
-  .container
   <div class="container">
     @yield('content')
   </div>

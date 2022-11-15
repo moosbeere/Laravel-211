@@ -13,9 +13,9 @@
     @foreach($results as $result)
     <tr>
       <th scope="row">{{$result['date']}}</th>
-      <td>{{$result['name']}}</td>
+      <td><a href="/main/galery/{{$result['full_image']}}">{{$result['name']}}</a></td>
       <td>{{$result['desc']}}</td>
-      <td>{{$result['preview_image']}}</td>
+      <td><img src="{{URL::asset($result['preview_image'])}}" alt="" height=100px width=100px></td>
     </tr>
    @endforeach
   </tbody>
