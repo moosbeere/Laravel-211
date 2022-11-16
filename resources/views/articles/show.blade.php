@@ -11,13 +11,18 @@
 
   <h3 class="text-center">Комментарии</h3>
   @foreach($comments as $comment)
-  <div class="card-body">
+  <form action="/comment/{{$comment->id}}" method="post">
+    @csrf
+    @method('DELETE')
+    <div class="card-body">
     <h5 class="card-title">{{$comment->title}} ({{$comment->created_at}})</h5>
     <p class="card-text">{{$comment->text}}</p>
-    <a href="/article/{{$article->id}}/edit" class="btn btn-secondary">Редактирование</a>
-    <a href="/article/{{$article->id}}/delete" class="btn btn-secondary">Удаление</a>
+    <a href="/comment/{{$comment->id}}/edit" class="btn btn-secondary">Редактирование</a>
+    <button type="submit" class="btn btn-secondary">Удалить</button>
   </div>
+  </form>
   @endforeach
+  {{$comments->links()}}
 </div>
 
 @if($errors->any())

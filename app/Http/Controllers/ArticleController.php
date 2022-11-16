@@ -33,7 +33,7 @@ class ArticleController extends Controller
 
     public function show($id){
         $article = Article::FindOrFail($id);
-        $comments=Comment::where('article_id', $id)->get();
+        $comments=Comment::where('article_id', $id)->latest()->paginate(2);
         return view('articles.show', ['article' => $article, 'comments'=>$comments]);
     }
 
