@@ -42,9 +42,20 @@
         <li class="nav-item">
           <a class="nav-link" href="/contact">Контакты</a>
         </li>
-       <li class="nav-item">
-          <a class="nav-link" href="/registration">Регистрация</a>
-        </li>
+        @guest
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/registr">Регистрация</a>
+          </li>       
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/login">Вход</a>
+          </li>
+        @endguest
+        @auth
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/logout">Выход</a>
+          </li>
+        @endauth
+        
          <!-- 
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>

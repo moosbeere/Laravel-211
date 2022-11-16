@@ -17,15 +17,21 @@ use App\Http\Controllers\CommentController;
 |
 */
 
-Route::get('/about', function () {
-    return view('main/about');
-});
-
-Route::get('/contact', function () {
-    return view('main/adress');
-});
+Route::get('/auth/registr', [AuthController::class, 'index']);
+Route::post('/auth/registr', [AuthController::class, 'store']);
+Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
+Route::post('/auth/login', [AuthController::class, 'customLogin']);
 
 Route::get('/', [ArticleController::class, 'index']);
+Route::resource('/article', ArticleController::class);
+
+Route::group(['prefix' => '/comment'], function(){
+    Route::post('/{id}', [CommentController::class, 'store']);
+    Route::get('/{id}', [CommentController::class, 'edit']);
+    Route::put('/{id}', [CommentController::class, 'update']);
+    Route::get('/{comment}/delete', [CommentController::class, 'destroy']);
+});
+
 
 // Route::group(['prefix' => '/article'], function(){
 //     Route::get('create', [ArticleController::class, 'create']);
@@ -35,14 +41,15 @@ Route::get('/', [ArticleController::class, 'index']);
 //     Route::post('update/{id}', [ArticleController::class, 'update']);
 //     Route::get('destroy/{id}', [ArticleController::class, 'destroy']);
 // });
-Route::post('/comment/{id}', [CommentController::class, 'store']);
-Route::get('/comment/{id}', [CommentController::class, 'edit']);
-Route::put('/comment/{id}', [CommentController::class, 'update']);
-Route::get('/comment/{comment}/delete', [CommentController::class, 'destroy']);
-Route::resource('/article', ArticleController::class);
-
-
 // Route::get('/', [MainController::class, 'index']);
 Route::get('/galery/{full}', [MainController::class, 'show']);
-Route::get('/view', [AuthController::class, 'view']);
-Route::post('/signin', [AuthController::class, 'signin']);
+Route::get('/about', function () {
+    return view('main/about');
+});
+
+Route::get('/contact', function () {
+    return view('main/adress');
+});
+
+
+
