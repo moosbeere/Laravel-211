@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Comment; 
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -16,7 +17,9 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::latest()->paginate(5);
-        return view('articles.index', ['articles' => $articles]);
+        $user = Auth::user();
+        return view('articles.index', ['articles' => $articles, 'user' => $user]);
+        
     }
 
     /**

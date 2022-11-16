@@ -18,7 +18,7 @@ use App\Http\Controllers\CommentController;
 |
 */
 
-Route::get('/', [ArticleController::class, 'index']);
+Route::get('/', [ArticleController::class, 'index'])->middleware('auth');
 
 Route::group(['prefix' => '/article'], function(){
     Route::get('/create', [ArticleController::class, 'create']);
@@ -35,7 +35,10 @@ Route::resource('comment', CommentController::class);
 // Route::get('/', [MainController::class, 'index']);
 // Route::get('/galery/{full}', [MainController::class, 'show']);
 Route::get('/registration', [AuthController::class, 'index']);
-Route::post('/signin', [AuthController::class, 'create']);
+Route::post('/registration', [AuthController::class, 'store']);
+Route::get('/signin', [AuthController::class, 'login'])->name('login');
+Route::post('/signin', [AuthController::class, 'customLogin']);
+Route::get('/signout', [AuthController::class, 'signout']);
 
 
 Route::get('/about', function () {

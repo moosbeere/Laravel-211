@@ -45,6 +45,12 @@
        <li class="nav-item">
           <a class="nav-link" href="/registration">Регистрация</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signin">Вход</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signout">Выход</a>
+        </li>
          <!-- 
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
