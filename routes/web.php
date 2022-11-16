@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,13 @@ use App\Http\Controllers\ArticleController;
 Route::group(['prefix'=>'/article'], function(){
     Route::get('/create', [ArticleController::class, 'create']);
     Route::post('/store', [ArticleController::class, 'store']);
-    Route::get('/show/{id}', [ArticleController::class, 'show']);
+    Route::get('/show/{id}', [ArticleController::class, 'show'])->name('show');
+    Route::get('/{id}/edit', [ArticleController::class, 'edit']);
+    Route::put('/{id}', [ArticleController::class, 'update']);
+    Route::get('/{id}/delete', [ArticleController::class, 'destroy']);
 });
+
+Route::resource('comment', CommentController::class);
 
 
 // Route::get('/', [MainController::class, 'index']);
