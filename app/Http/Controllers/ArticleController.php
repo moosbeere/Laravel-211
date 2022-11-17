@@ -106,6 +106,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        Comment::where('article_id', $article->id)->delete();
         $article->delete();
         return redirect()->route('main');
     }

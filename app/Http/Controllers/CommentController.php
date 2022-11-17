@@ -70,7 +70,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        return view('comments.edit', ['comment'=>$comment]);
     }
 
     /**
@@ -82,7 +82,14 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'text' => 'required',
+        ]);
+        $comment->title = request('title');
+        $comment->text = request('text');
+        $comment->save();
+        return redirect()->route('article.show', ['article'=>$comment->article_id]);
     }
 
     /**
@@ -93,6 +100,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect()->route('article.show', ['article'=>$comment->article_id]);
     }
 }
