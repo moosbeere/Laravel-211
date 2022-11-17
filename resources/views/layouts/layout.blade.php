@@ -43,9 +43,19 @@
         <li class="nav-item">
           <a class="nav-link" href="/article/create">Создать статью</a>
         </li>
+        @guest
         <li class="nav-item">
-          <a class="nav-link" href="/registration">Войти</a>
+          <a class="nav-link" href="/auth/registr">Регистрация</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/login">Войти</a>
+        </li>
+        @endguest
+        @auth
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/logout">Выйти</a>
+        </li>
+        @endauth
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown link

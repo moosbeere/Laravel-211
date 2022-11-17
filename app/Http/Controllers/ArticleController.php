@@ -58,6 +58,7 @@ class ArticleController extends Controller
 
     public function destroy($id){
         $article=Article::FindOrFail($id);
+        Comment::where('article_id', $id)->delete();
         $article->delete();
         return redirect('/');
     }

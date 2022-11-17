@@ -15,8 +15,17 @@ use App\Http\Controllers\CommentController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
+
 */
-Route::group(['prefix'=>'/article'], function(){
+
+Route::get('/auth/registr', [AuthController::class, 'create']);
+Route::post('/auth/registr', [AuthController::class, 'store']);
+Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
+Route::post('/auth/login', [AuthController::class, 'customLogin']);
+Route::get('/auth/logout', [AuthController::class, 'logout']);
+
+
+Route::group(['prefix'=>'/article', 'middleware'=>'auth:sanctum'], function(){
     Route::get('/create', [ArticleController::class, 'create']);
     Route::post('/store', [ArticleController::class, 'store']);
     Route::get('/show/{id}', [ArticleController::class, 'show'])->name('show');
@@ -31,8 +40,7 @@ Route::resource('comment', CommentController::class);
 // Route::get('/', [MainController::class, 'index']);
 Route::get('/', [ArticleController::class, 'index']);
 Route::get('/galery/{full}', [MainController::class, 'show']);
-Route::get('/registration', [AuthController::class, 'create']);
-Route::post('/signin', [AuthController::class, 'registration']);
+
 
 Route::get('/about', function () {
     return view('main/about');

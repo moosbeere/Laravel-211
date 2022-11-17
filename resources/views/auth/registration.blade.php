@@ -12,7 +12,7 @@
 </div>
 
 @endif
-<form action="/signin" method="post">
+<form action="/auth/registr" method="post">
     @csrf
     <meta name="csrf-token" content="cbpj1L7ym6fdPJhl5Fc0mH4MMU71gK1zatutgC3d">
 <div class="mb-3">
