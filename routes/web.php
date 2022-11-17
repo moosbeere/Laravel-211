@@ -18,6 +18,9 @@ use App\Http\Controllers\ArticleController;
 
 Route::get('/', [ArticleController::class, 'index'])->name('main');
 Route::resource('article', ArticleController::class);
+Route::group(['prefix'=>'comment'], function(){
+    Route::post('/{article_id}', [CommentController::class, 'store']);
+});
 
 // Route::get('/', [MainController::class, 'index']);
 Route::get('/main/galery/{full}', [MainController::class, 'show']);

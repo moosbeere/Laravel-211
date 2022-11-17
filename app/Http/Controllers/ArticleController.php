@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Models\Comment;
 
 class ArticleController extends Controller
 {
@@ -59,7 +60,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view('articles.show', ['article'=>$article]);        
+        $comments = Comment::where('article_id', $article->id)->latest()->get();
+        return view('articles.show', ['article'=>$article, 'comments'=>$comments]);        
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Comment;
 
 class ArticleSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class ArticleSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Article::factory(10)->create();
+        \App\Models\Article::factory(10)->has(Comment::factory(3))->create();
 
     }
 }
