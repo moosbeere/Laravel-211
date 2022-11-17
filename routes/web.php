@@ -21,9 +21,10 @@ Route::get('/auth/registr', [AuthController::class, 'index']);
 Route::post('/auth/registr', [AuthController::class, 'store']);
 Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth/login', [AuthController::class, 'customLogin']);
+Route::get('/auth/logout', [AuthController::class, 'logout']);
 
 Route::get('/', [ArticleController::class, 'index']);
-Route::resource('/article', ArticleController::class);
+Route::resource('/article', ArticleController::class)->middleware('auth:sanctum');
 
 Route::group(['prefix' => '/comment'], function(){
     Route::post('/{id}', [CommentController::class, 'store']);
