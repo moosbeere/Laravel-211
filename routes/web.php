@@ -16,7 +16,7 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
-Route::get('/', [ArticleController::class, 'index']);
+Route::get('/', [ArticleController::class, 'index'])->name('main');
 Route::resource('article', ArticleController::class);
 
 // Route::get('/', [MainController::class, 'index']);
