@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,10 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', [ArticleController::class, 'index']);
+Route::resource('article', ArticleController::class);
+
+// Route::get('/', [MainController::class, 'index']);
 Route::get('/main/galery/{full}', [MainController::class, 'show']);
 Route::get('/auth/registr', [AuthController::class, 'create']);
 Route::post('/auth/store', [AuthController::class, 'store']);
@@ -32,4 +36,5 @@ Route::get('/contact', function(){
         'email' => '@polytech.ru'
     ];
     return view('main.contact', ['contact' => $contact]);
+
 });

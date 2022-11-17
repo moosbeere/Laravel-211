@@ -14,7 +14,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::latest()->get();
+        return view('articles.index', ['articles'=>$articles]);
     }
 
     /**
@@ -24,7 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -35,7 +36,19 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'date' => 'date|required',
+            'title' => 'required',
+            'text' => 'required',
+        ]);
+
+        $article = new Article();
+        $article->date = $request->date;
+        $article->name = request('title');
+        $article->shortDesc = request('annot');
+        $article->desc = request('text');
+        $article->save();
+        return redirect('/');
     }
 
     /**
@@ -46,7 +59,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('articles.show', ['article'=>$article]);        
     }
 
     /**
