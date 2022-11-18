@@ -1,5 +1,6 @@
 @extends('layout.layout')
 @section('content')
+
 @if($errors->any())
     <div class="alert-danger">
         <ul>
@@ -11,7 +12,8 @@
         </ul>
     </div>
 @endif
-<form action="/signin" method="POST">
+
+<form action="/auth/registr" method="POST">
     @csrf
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Name</label>

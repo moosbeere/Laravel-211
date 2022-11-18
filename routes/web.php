@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,18 +16,31 @@ use App\Http\Controllers\ArticleController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/', function(){
-//     return view('welcome');
-// });
 
+//Auth
+Route::get('/auth/registr', [AuthController::class, 'index']);
+Route::post('/auth/regisrt', [AuthController::class, 'store']);
+Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
+Route::post('/auth/login', [AuthController::class, 'customLogin']);
+Route::get('/auth/logout', [AuthController::class, 'logout']);
+
+
+
+//Routes for Article
 Route::get('/', [ArticleController::class, 'index']);
 Route::resource('articles', ArticleController::class);
 
+//Routes for Comment
+Route::group(['prefix' => 'comment'], function(){
+    Route::post('', [CommentController::class, 'store']);
+    Route::get('/{comment}/edit', [CommentController::class, 'edit']);
+    Route::put('/{comment}', [CommentController::class, 'update']);
+    Route::get('/{comment}/delete', [CommentController::class, 'destroy']);
+
+});
+
 // Route::get('/', [MainController::class, 'index']);
 Route::get('/galery/{full}', [MainController::class, 'galery']);
-Route::get('/registration', [AuthController::class, 'index']);
-Route::post('/signin', [AuthController::class, 'store']);   
-
 Route::get('/about', function () {
     return view('main/about');
 });
@@ -39,3 +53,6 @@ Route::get('/contact', function () {
     ];
     return view('main/contact', ['contact' => $contact]);
 });
+// Route::get('/', function(){
+//     return view('welcome');
+// });
