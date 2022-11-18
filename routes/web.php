@@ -18,9 +18,9 @@ use App\Http\Controllers\CommentController;
 |
 */
 
-Route::get('/', [ArticleController::class, 'index'])->middleware('auth');
+Route::get('/', [ArticleController::class, 'index']);
 
-Route::group(['prefix' => '/article'], function(){
+Route::group(['prefix' => '/article', 'middleware'=>'auth:sanctum'], function(){
     Route::get('/create', [ArticleController::class, 'create']);
     Route::post('/store', [ArticleController::class, 'store']);
     Route::get('/show/{id}', [ArticleController::class, 'show']);
@@ -29,7 +29,7 @@ Route::group(['prefix' => '/article'], function(){
     Route::get('/destroy/{id}', [ArticleController::class, 'destroy']);
 });
 
-Route::resource('comment', CommentController::class);
+Route::resource('comment', CommentController::class)->middleware('auth:sanctum');
 
 
 // Route::get('/', [MainController::class, 'index']);
