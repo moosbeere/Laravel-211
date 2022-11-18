@@ -14,9 +14,6 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        if(Role::where('id', '2')){
-            return 0;
-        }
         Role::create([
             'role'=>'moderator',
         ]);
