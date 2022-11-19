@@ -19,7 +19,7 @@ use App\Http\Controllers\CommentController;
 
 //Auth
 Route::get('/auth/registr', [AuthController::class, 'index']);
-Route::post('/auth/regisrt', [AuthController::class, 'store']);
+Route::post('/auth/registr', [AuthController::class, 'store']);
 Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth/login', [AuthController::class, 'customLogin']);
 Route::get('/auth/logout', [AuthController::class, 'logout']);
@@ -28,10 +28,10 @@ Route::get('/auth/logout', [AuthController::class, 'logout']);
 
 //Routes for Article
 Route::get('/', [ArticleController::class, 'index']);
-Route::resource('articles', ArticleController::class);
+Route::resource('articles', ArticleController::class)->middleware('auth:sanctum');
 
 //Routes for Comment
-Route::group(['prefix' => 'comment'], function(){
+Route::group(['prefix' => 'comment', 'middleware'=>'auth:sanctum'], function(){
     Route::post('', [CommentController::class, 'store']);
     Route::get('/{comment}/edit', [CommentController::class, 'edit']);
     Route::put('/{comment}', [CommentController::class, 'update']);

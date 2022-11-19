@@ -1,5 +1,6 @@
 @extends('layout.layout')
 @section('content')
+
 <table class="table table-striped">
   <thead>
     <tr>
