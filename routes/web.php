@@ -26,7 +26,7 @@ Route::get('/auth/logout', [AuthController::class, 'logout']);
 Route::get('/', [ArticleController::class, 'index']);
 Route::resource('/article', ArticleController::class)->middleware('auth:sanctum');
 
-Route::group(['prefix' => '/comment'], function(){
+Route::group(['prefix' => '/comment', 'middleware'=>'auth:sanctum'], function(){
     Route::post('/{id}', [CommentController::class, 'store']);
     Route::get('/{id}', [CommentController::class, 'edit']);
     Route::put('/{id}', [CommentController::class, 'update']);
