@@ -21,11 +21,20 @@ class AuthController extends Controller
             'email' => 'required|email|unique:App\Models\User',
             'password' => 'required|min:6',
         ]);
+        
         $user = User::create([
             'name' => request('name'),
             'email' => request('email'),
-            'password' => Hash::make(request('password')),
+            'role_id' => 2,
+            'password' => Hash::make(request('password')),            
         ]);
+
+        // $user = new User;
+        // $user->name = request('name');
+        // $user->email = request('email');
+        // $user->role_id = 2;
+        // $user->password = Hash::make(request('password'));
+        // $user->save();
 
         $user->createToken('myAppToken');
         return redirect()->route('login');
