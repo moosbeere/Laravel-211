@@ -16,10 +16,19 @@ use App\Http\Controllers\CommentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Auth
+Route::get('/auth/registr', [AuthController::class, 'create']);
+Route::post('/auth/registr', [AuthController::class, 'store']);
+Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
+Route::post('/auth/login', [AuthController::class, 'customLogin']);
+Route::get('auth/logout', [AuthController::class, 'logout']);
 
+//Article
 Route::get('/', [ArticleController::class, 'index'])->name('main');
-Route::resource('article', ArticleController::class);
-Route::group(['prefix'=>'comment'], function(){
+Route::resource('article', ArticleController::class)->middleware('auth:sanctum');
+
+//Comment
+Route::group(['prefix'=>'comment', 'middleware'=>'auth:sanctum'], function(){
     Route::post('/{article_id}', [CommentController::class, 'store']);
     Route::get('/{comment}/edit', [CommentController::class, 'edit']);
     Route::put('/{comment}', [commentController::class, 'update']);
@@ -28,9 +37,6 @@ Route::group(['prefix'=>'comment'], function(){
 
 // Route::get('/', [MainController::class, 'index']);
 Route::get('/main/galery/{full}', [MainController::class, 'show']);
-Route::get('/auth/registr', [AuthController::class, 'create']);
-Route::post('/auth/store', [AuthController::class, 'store']);
-
 Route::get('/about', function () {
     return view('main.about');
 });
