@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 
 class CommentController extends Controller
 {
@@ -45,6 +48,7 @@ class CommentController extends Controller
         $comment->title = request('title');
         $comment->text = request('text');
         $comment->article()->associate($article); 
+        $comment->user()->associate(Auth::id());
         $comment->save();
         return redirect('/article/show/'.request('id'));
         // $comment->title = $request->title;
@@ -69,6 +73,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
+        Gate::authorize('update-comment', $comment);
         return view('comment.edit', ['comment'=>$comment]);
     }
 
@@ -99,6 +104,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        Gate::authorize('update-comment', $comment);
         $comment->delete();
         return redirect('/article/show/'.$comment->article_id);
     }

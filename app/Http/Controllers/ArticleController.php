@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Comment; 
 use Illuminate\Support\Facades\Auth;
 
+
 class ArticleController extends Controller
 {
     /**
@@ -27,6 +28,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
         return view('articles.create');
     }
 
@@ -74,6 +76,7 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', [self::class]);
         $article = Article::FindOrFail($id);
         return view('articles.edit', ['article' => $article]);
     }
@@ -110,6 +113,7 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', [self::class]);
         $article = Article::FindOrFail($id);
         Comment::where('article_id', $id)->delete();
         $article->delete();
