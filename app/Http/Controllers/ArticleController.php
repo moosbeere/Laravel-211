@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Gate;
 
 class ArticleController extends Controller
 {
@@ -26,6 +27,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [self::class]);
         return view('articles.create');
     }
 
@@ -37,6 +39,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', [self::class]);
         $request->validate([
             'date' => 'date|required',
             'title' => 'required',
@@ -72,6 +75,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        $this->authorize('update', [self::class, $article]);
         return view('articles.edit', ['article'=>$article]);
     }
 
@@ -84,6 +88,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+        $this->authorize('update', [self::class, $article]);
         $request->validate([
             'date' => 'date|required',
             'title' => 'required',
@@ -106,6 +111,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        $this->authorize('delete', [self::class, $article]);
         Comment::where('article_id', $article->id)->delete();
         $article->delete();
         return redirect()->route('main');
