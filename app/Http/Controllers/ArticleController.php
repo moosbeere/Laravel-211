@@ -14,10 +14,13 @@ class ArticleController extends Controller
     }
 
     public function create(){
+        $this->authorize('create', [self::class]);
         return view('articles/create');
     }
     
     public function store(Request $request){
+        $this->authorize('create', [self::class]);
+
         $request->validate([
             'name' => 'required',
             'annotation' =>'required|min:10',
@@ -39,15 +42,18 @@ class ArticleController extends Controller
 
     public function edit($id){
         $article=Article::FindOrFail($id);
+        $this->authorize('update', [self::class, $article]);
         return view('articles.edit', ['article'=>$article]);
     }
 
     public function update(Request $request, $id){
+        
         $request->validate([
             'name' => 'required',
             'annotation' =>'required|min:10',
         ]);
         $article=Article::FindOrFail($id);
+        $this->authorize('update', [self::class, $article]);
         $article->name = request('name');
         $article->date = request('date');
         $article->shortDesc = request('annotation');
@@ -58,6 +64,7 @@ class ArticleController extends Controller
 
     public function destroy($id){
         $article=Article::FindOrFail($id);
+        $this->authorize('delete', [self::class, $article]);
         Comment::where('article_id', $id)->delete();
         $article->delete();
         return redirect('/');

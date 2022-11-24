@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {
@@ -43,6 +44,7 @@ class CommentController extends Controller
         $comment->title = request('title');
         $comment->text = request('text');
         $comment->article()->associate(request('id'));
+        $comment->user()->associate(auth()->user());
         $comment->save();
         return redirect()->route('show', ['id'=>request('id')]);
     }
@@ -67,6 +69,7 @@ class CommentController extends Controller
     public function edit($id)
     {
         $comment = Comment::FindOrFail($id);
+        Gate::authorize('update-comment', $comment);
         return view('comments.edit', ['comment' => $comment]);
     }
 
@@ -84,6 +87,7 @@ class CommentController extends Controller
             'text' => 'required',
         ]);
         $comment = Comment::FindOrFail($id);
+        Gate::authorize('update-comment', $comment);
         $comment->title = request('title');
         $comment->text = request('text');
         $comment->save();
@@ -99,6 +103,7 @@ class CommentController extends Controller
     public function destroy($id)
     {
         $comment = Comment::FindOrFail($id);
+        Gate::authorize('update-comment', $comment);
         $comment->delete();
         return redirect()->route('show', ['id' => $comment->article_id]);
     }
