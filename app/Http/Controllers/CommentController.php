@@ -19,7 +19,19 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::where('accept', null)->latest()->paginate(10);
+        return view('comments.index', ['comments'=>$comments]);
+    }
+
+    public function accept(Comment $comment){
+        $comment->accept = 1;
+        $comment->save();
+        return redirect()->route('index');
+    }
+    public function reject(Comment $comment){
+        $comment->accept = 0;
+        $comment->save();
+        return redirect()->route('index');
     }
 
     /**
@@ -52,10 +64,12 @@ class CommentController extends Controller
         // $comment->article_id = $article_id;
         $comment->article()->associate($article_id);
         $comment->user()->associate(auth()->user());
-        $comment->save();
+        $result = $comment->save();
         $test = new SendMail('добавлен новый комментарий к новости '. $article);
         Mail::send($test);
-        return redirect()->route('article.show', ['article'=>$article_id]);
+        // return redirect()->route('article.show', ['article'=>$article_id, 'message'=>'Комментарий ожидает модерации!']);
+        return redirect()->route('article.show', ['article'=>$article_id, 'result'=>0]);
+
 
     }
 
@@ -114,4 +128,6 @@ class CommentController extends Controller
         $comment->delete();
         return redirect()->route('article.show', ['article'=>$comment->article_id]);
     }
+
+
 }

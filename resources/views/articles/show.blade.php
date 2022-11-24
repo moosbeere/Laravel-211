@@ -14,6 +14,25 @@
     </div>
 
     <h3 class=text-center>Комментарии</h3>
+
+    <!-- @isset($_GET['message'])
+    <div class="alert alert-primary">
+        {{$_GET['message']}}
+    </div>
+    @endisset -->
+    @isset($_GET['result'])
+        @if ($_GET['result'] == 1)
+            <div class="alert alert-primary">
+            Комментарий ожидает модерации!
+        </div>
+        @else
+            <div class="alert alert-danger">
+                Комментарий не добавлен!
+            </div>
+        @endif
+    @endisset
+
+
     <div class="card" style="margin-top">
     @foreach($comments as $comment)
         <div class="card-body">

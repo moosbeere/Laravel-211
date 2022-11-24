@@ -40,6 +40,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create', [self::class]);
+        
         $request->validate([
             'date' => 'date|required',
             'title' => 'required',
@@ -63,7 +64,10 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $comments = Comment::where('article_id', $article->id)->latest()->get();
+        $comments = Comment::whereColumn([
+            ['article_id', $article->id],
+            ['accept', 1]
+            ])->latest()->get();
         return view('articles.show', ['article'=>$article, 'comments'=>$comments]);        
     }
 
