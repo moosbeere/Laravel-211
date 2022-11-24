@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 class CommentController extends Controller
 {
@@ -38,14 +40,15 @@ class CommentController extends Controller
      */
     public function store(Request $request, $id)
     {
-        // $article = Article::FindOrFail($id);
+        $article = Article::FindOrFail($id);
         $comment = new Comment();
         $comment->title = request('title');
         $comment->text = request('text');
         $comment->article()->associate($id);
         $comment->user()->associate(Auth::id());
         $comment->save();
-        echo $id;
+        $testMail = new SendMail('Новость '.$article->name.' прокомментировали: '.$comment->transliterator_list_ids);
+        Mail::send($testMail);
         return redirect('/article/'.$id);
     }
 
