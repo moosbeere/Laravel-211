@@ -6,6 +6,9 @@ use App\Models\Comment;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
+
 
 class CommentController extends Controller
 {
@@ -42,6 +45,7 @@ class CommentController extends Controller
             'text' => 'required',
         ]);
 
+        $article = Article::where('id', $article_id)->value('name');
         $comment = new Comment();
         $comment->title = request('title');
         $comment->text = request('text');
@@ -49,6 +53,8 @@ class CommentController extends Controller
         $comment->article()->associate($article_id);
         $comment->user()->associate(auth()->user());
         $comment->save();
+        $test = new SendMail('добавлен новый комментарий к новости '. $article);
+        Mail::send($test);
         return redirect()->route('article.show', ['article'=>$article_id]);
 
     }
