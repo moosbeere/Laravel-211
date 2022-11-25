@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
+use App\Models\Article;
+
 
 class CommentController extends Controller
 {
@@ -45,6 +50,9 @@ class CommentController extends Controller
         $comment->text = $request->text;//запись аналогична записи сверху
         $comment->article()->associate(request('id'));
         $comment->save();
+        $article = Article::FindOrFail(request('id'));
+        $msg = new SendMail($article, $comment);
+        Mail::send($msg);
         return redirect()->route('articles.show', ['article'=>request('id')]);
     }
 
@@ -67,6 +75,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
+        Gate::authorize('update-comment', $comment);
         return view('comments.edit', ['comment'=>$comment]);
     }
 
@@ -79,6 +88,8 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
+        Gate::authorize('update-comment', $comment);
+
         $request->validate([
             'title' => 'required',
             'text'=>'required',
@@ -98,6 +109,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        Gate::authorize('update-comment', $comment);
         $comment->delete();
         return redirect()->route('articles.show', ['article'=>$comment->article_id]);
 

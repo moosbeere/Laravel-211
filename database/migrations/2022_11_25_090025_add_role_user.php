@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ArticleChange extends Migration
+class AddRoleUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class ArticleChange extends Migration
      */
     public function up()
     {
-        Schema::table('articles', function(Blueprint $table){
-            $table->string('preview_image')->nullable()->change();
-            $table->string('full_image')->nullable()->change();
+        Schema::table('users', function(Blueprint $table){
+            $table->string('role')->default('reader')->add();
         });
     }
 
