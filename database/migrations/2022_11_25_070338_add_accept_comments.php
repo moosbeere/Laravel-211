@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ArticlesChange extends Migration
+class AddAcceptComments extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class ArticlesChange extends Migration
      */
     public function up()
     {
-        Schema::table('articles', function (Blueprint $table){
-            $table->string('preview_image')->nullable()->change();
-            $table->string('full_image')->nullable()->change();
+        Schema::table('comments', function(Blueprint $table){
+            $table->integer('accept')->nullable()->add();
         });
     }
 
