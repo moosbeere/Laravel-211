@@ -35,7 +35,7 @@ class VeryLongJob implements ShouldQueue
      */
     public function handle()
     {
-        $testMail = new SendMail('Новость '.$article->name.' прокомментировали. Комментарий ожидает модерации');
+        $testMail = new SendMail('Новость '.$this->article->name.' прокомментировали. Комментарий ожидает модерации');
         Mail::send($testMail);
     }
 }
