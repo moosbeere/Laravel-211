@@ -13,7 +13,7 @@
 </div>
 @endif
 
-<form action="store" method="POST">
+<form action="/article" method="POST">
     @csrf
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Дата</label>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use App\Jobs\VeryLongJob;
 
 class CommentController extends Controller
 {
@@ -47,8 +48,7 @@ class CommentController extends Controller
         $comment->article()->associate($id);
         $comment->user()->associate(Auth::id());
         $comment->save();
-        $testMail = new SendMail('Новость '.$article->name.' прокомментировали: '.$comment->transliterator_list_ids);
-        Mail::send($testMail);
+        VeryLongJob::dispatch($article);
         return redirect('/article/'.$id);
     }
 

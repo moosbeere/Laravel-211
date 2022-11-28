@@ -42,7 +42,11 @@
         <li class="nav-item">
           <a class="nav-link" href="/contact">Контакты</a>
         </li>
+      </ul>
+    </div>
+    <div class="navbar-nav d-flex justify-content-end">
         @guest
+        <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link" href="/auth/registr">Регистрация</a>
           </li>       
@@ -51,18 +55,30 @@
           </li>
         @endguest
         @auth
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Уведомления <span class="badge bg-info text-dark">
+                                            {{ auth()->user()->unreadNotifications->count() }}</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        @foreach(auth()->user()->unreadNotifications as $notification)
+                                            <li><a class="dropdown-item" href="#">{{ $notification->data['article']['name'] }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            </ul>
           <li class="nav-item">
             <a class="nav-link" href="/auth/logout">Выход</a>
           </li>
         @endauth
-        
-         <!-- 
+    <!-- 
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li> -->
       </ul>
+      </div>
     </div>
-  </div>
 </nav> 
 <main>
   <div class="container">

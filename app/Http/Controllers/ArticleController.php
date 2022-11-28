@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\User;
 use App\Models\Comment;
+use App\Notifications\NotifyNewArticle;
+use Illuminate\Support\Facades\Notification;
 
 class ArticleController extends Controller
 {
@@ -48,7 +51,11 @@ class ArticleController extends Controller
         $article->name = request('title');
         $article->shortDesc = request('annotation');
         $article->desc = request('description');
-        $article->save();
+        if ($article->save()){
+            echo auth()->id();
+            $user = User::where('id', '!=', auth()->id())->get();
+            Notification::send($user, new NotifyNewArticle($article));
+        };
         return redirect('/');
     }
 

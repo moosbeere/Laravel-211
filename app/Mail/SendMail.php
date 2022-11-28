@@ -31,7 +31,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('test@mospolytech.ru')
+        return $this->from(env('MAIL_USERNAME'))
                     ->to('moosbeere_O@mail.ru')
                     ->with(['text'=>$this->msg])
                     ->view('mail.send');
