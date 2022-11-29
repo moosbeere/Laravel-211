@@ -33,7 +33,7 @@
             <a href="/comment/{{$comment->id}}/edit" class="btn btn-secondary">Редактировать</a>
             <a href="/comment/{{$comment->id}}/delete" class="btn btn-secondary">Удалить</a>
         @endcan
-    </div>{{session()->result()}}
+    </div>
 @endforeach
 </div>
 </br>
