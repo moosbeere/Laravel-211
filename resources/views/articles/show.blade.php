@@ -17,6 +17,13 @@
  
 </div>
 <h3 class="text-center">Комментарии</h3>
+@isset($_GET['result'])
+    @if($_GET['result'])
+        <div class="alert alert-primary" role="alert">
+            <span>Ваш комментарий отправлен на модерацию!</span> 
+        </div>
+    @endif
+@endisset
 <div class="card" style="margin-top">
 @foreach($comments as $comment)
     <div class="card-body">
@@ -26,7 +33,7 @@
             <a href="/comment/{{$comment->id}}/edit" class="btn btn-secondary">Редактировать</a>
             <a href="/comment/{{$comment->id}}/delete" class="btn btn-secondary">Удалить</a>
         @endcan
-    </div>
+    </div>{{session()->result()}}
 @endforeach
 </div>
 </br>

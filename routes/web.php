@@ -32,8 +32,11 @@ Route::resource('articles', ArticleController::class)->middleware('auth:sanctum'
 
 //Routes for Comment
 Route::group(['prefix' => 'comment', 'middleware'=>'auth:sanctum'], function(){
+    Route::get('', [CommentController::class, 'index']);
     Route::post('', [CommentController::class, 'store']);
     Route::get('/{comment}/edit', [CommentController::class, 'edit']);
+    Route::get('/{comment}/accept', [CommentController::class, 'accept']);
+    Route::get('/{comment}/reject', [CommentController::class, 'reject']);
     Route::put('/{comment}', [CommentController::class, 'update']);
     Route::get('/{comment}/delete', [CommentController::class, 'destroy']);
 

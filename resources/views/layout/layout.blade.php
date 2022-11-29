@@ -39,6 +39,9 @@
           <a class="nav-link active" aria-current="page" href="/articles/create">Создать новость</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/comment">Новые комментарии</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/about">О нас</a>
         </li>
         <li class="nav-item">

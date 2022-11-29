@@ -19,7 +19,20 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::where('accept', null)->latest()->paginate(10);
+        return view('comments.index', ['comments'=>$comments]);
+    }
+
+    public function accept(Comment $comment){
+        $comment->accept = 1;
+        $comment->save();
+        return redirect()->back();
+    }
+
+    public function reject(Comment $comment){
+        $comment->accept = 0;
+        $comment->save();
+        return redirect()->back();
     }
 
     /**
@@ -49,11 +62,11 @@ class CommentController extends Controller
         $comment->title = request('title');
         $comment->text = $request->text;//запись аналогична записи сверху
         $comment->article()->associate(request('id'));
-        $comment->save();
+        $result = $comment->save();
         $article = Article::FindOrFail(request('id'));
         $msg = new SendMail($article, $comment);
         Mail::send($msg);
-        return redirect()->route('articles.show', ['article'=>request('id')]);
+        return redirect()->route('articles.show', ['article'=>request('id'), 'result'=>$result]);
     }
 
     /**
