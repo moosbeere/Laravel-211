@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMail;
 use App\Models\Article;
+use App\Jobs\VeryLongJob;
 
 
 class CommentController extends Controller
@@ -64,8 +63,7 @@ class CommentController extends Controller
         $comment->article()->associate(request('id'));
         $result = $comment->save();
         $article = Article::FindOrFail(request('id'));
-        $msg = new SendMail($article, $comment);
-        Mail::send($msg);
+        VeryLongJob::dispatch($article);
         return redirect()->route('articles.show', ['article'=>request('id'), 'result'=>$result]);
     }
 

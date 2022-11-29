@@ -22,10 +22,9 @@ class SendMail extends Mailable
     protected $article;
     protected $comment;
 
-    public function __construct(Article $article, Comment $comment)
+    public function __construct(Article $article)
     {
         $this->article = $article;
-        $this->comment = $comment;
     }
 
     /**
@@ -37,7 +36,7 @@ class SendMail extends Mailable
     {
         return $this->from(env('MAIL_USERNAME'))
                     ->to('moosbeere_O@mail.ru')
-                    ->with(['comment'=>$this->comment, 'article'=>$this->article])
+                    ->with('article', $this->article)
                     ->view('mail.send');
     }
 }
