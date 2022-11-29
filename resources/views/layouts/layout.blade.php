@@ -72,11 +72,15 @@
   <div class="container">
     @yield('content')
   </div> 
+  <div id="app">
+    <App />
+ </div>
 </main> 
   <footer class="bg-light text-center text-lg-start">
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
     Студенты группы 211-322
   </div>
 </footer>
+    <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
