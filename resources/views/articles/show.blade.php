@@ -10,6 +10,14 @@
   </div>
 
   <h3 class="text-center">Комментарии</h3>
+  @isset($_GET['result'])
+    @if($_GET['result'])
+      <div class="alert alert-primary">
+        Ваш комментарий ожидает модерации!
+      </div>
+    @endif
+  @endisset
+
   @foreach($comments as $comment)
   <form action="/comment/{{$comment->id}}" method="post">
     @csrf
