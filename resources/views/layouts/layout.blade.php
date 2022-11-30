@@ -79,6 +79,11 @@
   <div class="container">
     @yield('content')
   </div>
+  
+  <div id="app">
+    <App />
+ </div>
+
  </main>
  <footer class="bg-light text-center text-lg-start">
 
@@ -86,5 +91,6 @@
     Студенты группы 211-321
   </div>
 </footer>
+  <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
