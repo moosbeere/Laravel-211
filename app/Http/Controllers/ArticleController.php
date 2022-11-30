@@ -36,7 +36,10 @@ class ArticleController extends Controller
 
     public function show($id){
         $article = Article::FindOrFail($id);
-        $comments=Comment::where('article_id', $id)->latest()->paginate(2);
+        $comments=Comment::where([
+                            ['article_id', $id],
+                            ['accept', 1]
+                        ])->latest()->paginate(5);
         return view('articles.show', ['article' => $article, 'comments'=>$comments]);
     }
 

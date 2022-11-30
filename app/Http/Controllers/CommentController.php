@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
+use App\Models\Article;
 
 class CommentController extends Controller
 {
@@ -15,7 +18,20 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::where('accept', null)->latest()->paginate(10);
+        return view('comments.index', ['comments'=>$comments]);
+    }
+
+    public function accept(Comment $comment){
+        $comment->accept = 1;
+        $comment->save();
+        return redirect()->back();
+    }
+
+    public function reject(Comment $comment){
+        $comment->accept = 0;
+        $comment->save();
+        return redirect()->back();
     }
 
     /**
@@ -45,7 +61,12 @@ class CommentController extends Controller
         $comment->text = request('text');
         $comment->article()->associate(request('id'));
         $comment->user()->associate(auth()->user());
-        $comment->save();
+        $result = $comment->save();
+        $article = Article::where('id', $comment->article_id)->first();
+        if ($request){
+            $msg = new TestMail($article, $comment);
+            Mail::send($msg);
+        }
         return redirect()->route('show', ['id'=>request('id')]);
     }
 

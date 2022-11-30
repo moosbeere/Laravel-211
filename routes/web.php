@@ -17,14 +17,14 @@ use App\Http\Controllers\CommentController;
 |
 
 */
-
+//Auth
 Route::get('/auth/registr', [AuthController::class, 'create']);
 Route::post('/auth/registr', [AuthController::class, 'store']);
 Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth/login', [AuthController::class, 'customLogin']);
 Route::get('/auth/logout', [AuthController::class, 'logout']);
 
-
+//Article
 Route::group(['prefix'=>'/article', 'middleware'=>'auth:sanctum'], function(){
     Route::get('/create', [ArticleController::class, 'create']);
     Route::post('/store', [ArticleController::class, 'store']);
@@ -34,7 +34,10 @@ Route::group(['prefix'=>'/article', 'middleware'=>'auth:sanctum'], function(){
     Route::get('/{id}/delete', [ArticleController::class, 'destroy']);
 });
 
+//Comment
 Route::resource('comment', CommentController::class);
+Route::get('/comment/{comment}/accept', [CommentController::class, 'accept']);
+Route::get('/comment/{comment}/reject', [CommentController::class, 'reject']);
 
 
 // Route::get('/', [MainController::class, 'index']);

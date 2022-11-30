@@ -44,6 +44,9 @@
           <li class="nav-item">
             <a class="nav-link" href="/article/create">Создать статью</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/comment">Новые комментарии</a>
+          </li>
         @endcan
         @guest
         <li class="nav-item">
