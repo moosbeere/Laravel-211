@@ -51,7 +51,11 @@ class ArticleController extends Controller
         $article->name = request('title');
         $article->shortDesc = request('annotation');
         $article->desc = request('description');
-        $article->save();
+        $result = $article->save();
+        $user = User::where('id', '!=', auth()->id())->get();
+        if ($result){
+            Notification::send($user, new PublicArticle($article));
+        }
         return redirect('/');
     }
 
