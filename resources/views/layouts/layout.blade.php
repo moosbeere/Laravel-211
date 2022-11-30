@@ -58,10 +58,10 @@
               </li>
             @endguest
             @auth
-            <div id="app">
-            <template>
+            <!-- <div id="app"> -->
+            <!-- <template> -->
             <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                             Уведомления <span class="badge bg-info text-dark">
                             {{ auth()->user()->unreadNotifications->count() }}</span>
                   </a>
@@ -71,8 +71,8 @@
                   @endforeach
                   </ul>
               </li>
-          </template>
-            </div>
+          <!-- </template> -->
+            <!-- </div> -->
               <li class="nav-item">
                 <a class="nav-link" href="/signout">Выход</a>
               </li>
@@ -90,9 +90,6 @@
   <div class="container">
     @yield('content')
   </div> 
-  <div id="app">
-    <App />
- </div>
 </main> 
   <footer class="bg-light text-center text-lg-start">
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
