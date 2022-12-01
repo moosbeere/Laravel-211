@@ -80,6 +80,9 @@
   </div>
 </nav>
 <main>
+  <div id="app">
+            <App />
+  </div>
   <div class="container">
     @yield('content')
   </div>
@@ -90,4 +93,5 @@
   Студенты группы 211-329.
 </div>
 </footer>
+  <script src="{{mix('js/app.js')}}"></script>
 </html>
