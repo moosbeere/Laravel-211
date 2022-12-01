@@ -1,12 +1,16 @@
 <template>
-
+<div v-show="this.msg != null" class="alert alert-primary" role="alert">
+    Добавлена новая статья <strong>{{this.msg}}</strong>
+</div>
 </template>
 <script>
     export default {
     data() { return { msg: null } },
         created() {
-            window.Echo.channel('test').listen('NewArticleEvent', (e) => {
-                alert('Добавлена новая статья!');
+            window.Echo.channel('test').listen('NewArticleEvent', (name) => {
+                console.log(name);
+                this.msg=name.name;
+                // alert('Добавлена новая статья!');
             })
         }
     }

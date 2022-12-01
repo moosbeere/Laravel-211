@@ -76,14 +76,14 @@
   </div>
 </nav>
  <main>
+ <div id="app">
+    <App />
+ </div>
+
   <div class="container">
     @yield('content')
   </div>
   
-  <div id="app">
-    <App />
- </div>
-
  </main>
  <footer class="bg-light text-center text-lg-start">
 

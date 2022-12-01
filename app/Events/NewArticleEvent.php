@@ -20,7 +20,7 @@ class NewArticleEvent implements ShouldBroadcast
      * @return void
      */
 
-    protected $name;
+   public $name;
     public function __construct($name)
     {
         $this->name = $name;
@@ -35,4 +35,8 @@ class NewArticleEvent implements ShouldBroadcast
     {
         return new Channel('test');
     }
+    public function broadcastWith()
+{
+    return ['name' => $this->name];
+}
 }
