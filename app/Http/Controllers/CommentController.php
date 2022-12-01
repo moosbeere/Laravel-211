@@ -6,8 +6,7 @@ use App\Models\Comment;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMail;
+use App\Jobs\VeryLongJob;
 
 
 class CommentController extends Controller
@@ -65,10 +64,11 @@ class CommentController extends Controller
         $comment->article()->associate($article_id);
         $comment->user()->associate(auth()->user());
         $result = $comment->save();
-        $test = new SendMail('добавлен новый комментарий к новости '. $article);
-        Mail::send($test);
+        if ($result){
+            VeryLongJob::dispatch($article);
+        }
         // return redirect()->route('article.show', ['article'=>$article_id, 'message'=>'Комментарий ожидает модерации!']);
-        return redirect()->route('article.show', ['article'=>$article_id, 'result'=>0]);
+        return redirect()->route('article.show', ['article'=>$article_id, 'result'=>$result]);
 
 
     }
