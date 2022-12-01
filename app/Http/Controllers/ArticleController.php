@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Events\NewArticleEvent;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewArticleNotify;
 
 class ArticleController extends Controller
 {
@@ -32,6 +35,8 @@ class ArticleController extends Controller
         $article->shortDesc = request('annotation');
         $article->desc = request('description');
         $article->save();
+        $users = User::where('id', '!=', auth()->id())->get();
+        Notification::send($users, new NewArticleNotify($article));
         event(new NewArticleEvent($article->name));
         return redirect('/');
     }
