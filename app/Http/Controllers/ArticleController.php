@@ -6,6 +6,9 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PublicArticleNotify;
 
 class ArticleController extends Controller
 {
@@ -52,7 +55,11 @@ class ArticleController extends Controller
         $article->name = request('title');
         $article->shortDesc = request('annot');
         $article->desc = request('text');
-        $article->save();
+        $result = $article->save();
+        $users=User::where('id', '!=', auth()->id())->get();
+        if ($result){
+            Notification::send($users, new PublicArticleNotify($article));
+        }
         return redirect('/');
     }
 

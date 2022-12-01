@@ -49,19 +49,32 @@
         <li class="nav-item">
           <a class="nav-link" href="contact">Контакты</a>
         </li>
-        @guest
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/registr">Регистрация</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/login">Войти</a>
-        </li>
-        @endguest
-        @auth
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/logout">Выйти</a>
-        </li>
-        @endauth
+        </div>
+        <div class="navbar-nav d-flex justify-content-end">
+            @guest
+              <li class="nav-item">
+                <a class="nav-link" href="/auth/registr">Регистрация</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/auth/login">Войти</a>
+              </li>
+            @endguest
+            @auth
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+              Уведомление
+            </a>
+            <ul class="dropdown-menu">
+              @foreach(auth()->user()->unreadNotifications() as $notification)
+                <li><a class="dropdown-item" href="#">{{$notification->data['article']['name']}}</a></li>
+              @endforeach
+            </ul>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/logout">Выйти</a>
+            </li>
+            @endauth
+        </div>
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>
@@ -83,9 +96,11 @@
   <div id="app">
             <App />
   </div>
+  
   <div class="container">
     @yield('content')
   </div>
+
 </main>
 <footer class="bg-light text-center text-lg-start">
 
