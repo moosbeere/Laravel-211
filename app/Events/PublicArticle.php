@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Article;
 
-class PublicArticle
+class PublicArticle implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -33,6 +33,9 @@ class PublicArticle
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('test-channel');
+        return new Channel('test');
+    }
+    public function broadcastWith(){
+        return ['name', $this->article->name];
     }
 }

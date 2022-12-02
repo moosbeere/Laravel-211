@@ -47,6 +47,8 @@
         <li class="nav-item">
           <a class="nav-link" href="/contact">Контакты</a>
         </li>
+        </div>
+        <div class="navbar-nav d-flex justify-content-end">
         @guest
          <li class="nav-item">
           <a class="nav-link" href="/auth/registr">Регистрация</a>
@@ -56,21 +58,20 @@
         </li>
         @endguest
         @auth
-        <li class="nav-item">
-          <a class="nav-link" href="/auth/logout">Выйти</a>
-        </li>
-        @endauth
-        <!--
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            Уведомления <span>{{auth()->user()->notifications()->count()}}</span>
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li> -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/logout">Выйти</a>
+        </li>
+        @endauth        
       </ul>
     </div>
   </div>
