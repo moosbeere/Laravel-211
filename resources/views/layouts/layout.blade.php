@@ -67,7 +67,7 @@
                   </a>
                   <ul class="dropdown-menu">
                   @foreach(auth()->user()->unreadNotifications as $notification)
-                       <li><a class="dropdown-item" href="#">{{ $notification->data['article']['name'] }}</a></li>
+                       <li><a class="dropdown-item" href="/article/show/{{ $notification->data['article']['id']}}?notify={{$notification->id}}">{{ $notification->data['article']['name']}}</a></li>
                   @endforeach
                   </ul>
               </li>

@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\Article;
 
 class PublicArticle extends Notification
 {
@@ -56,7 +57,7 @@ class PublicArticle extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'article' =>$this->article->name,
+            'article' =>$this->article,
         ];
     }
 }

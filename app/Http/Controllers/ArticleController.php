@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Comment; 
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PublicArticle;
 
 
 class ArticleController extends Controller
@@ -67,6 +70,9 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
+        if (isset($_GET['notify'])){
+            auth()->user()->notifications()->where('id', $_GET['notify'])->first()->markAsRead();
+        }
         $article = Article::FindOrFail($id);
         $comment = Comment::whereColumn([
                                 ['article_id', $id],
