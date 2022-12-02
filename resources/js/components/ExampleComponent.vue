@@ -1,25 +1,30 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                    <div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- <div v-show="this.name != null" class="alert alert-primary" role="alert">
+       Добавлена новая статья <strong>{{this.name}}</strong>
+    </div> -->
 </template>
 
 <script>
     export default {
-        mounted() {
-           console.log('Component mounted.')
+        data(){
+            return {name:null}
+        },
+        methods:{
+        showAlert() {
+            // Use sweetalert2
+            this.$swal({
+                icon:'success',
+                title:'Добавлена новая запись: ',
+                text: this.name,
+            });
+            }
+        },
+           created() {
+            window.Echo.channel('test').listen('PublicArticleEvent', (name)=>{
+                console.log(name[1]);
+                this.name=name[1];
+                this.showAlert();
+            });          
             
         }
     }

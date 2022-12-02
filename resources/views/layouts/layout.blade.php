@@ -58,8 +58,6 @@
               </li>
             @endguest
             @auth
-            <!-- <div id="app"> -->
-            <!-- <template> -->
             <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                             Уведомления <span class="badge bg-info text-dark">
@@ -71,22 +69,19 @@
                   @endforeach
                   </ul>
               </li>
-          <!-- </template> -->
-            <!-- </div> -->
               <li class="nav-item">
                 <a class="nav-link" href="/signout">Выход</a>
               </li>
             @endauth
         </div>
-         <!-- 
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li> -->
       </ul>
     </div>
   </div>
 </nav> 
 <main>
+<div id="app">
+  <App/>
+          </div>
   <div class="container">
     @yield('content')
   </div> 
@@ -96,6 +91,7 @@
     Студенты группы 211-322
   </div>
 </footer>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

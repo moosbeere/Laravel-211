@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\PublicArticle;
+use App\Events\PublicArticleEvent;
 
 
 class ArticleController extends Controller
@@ -58,6 +59,7 @@ class ArticleController extends Controller
         $user = User::where('id', '!=', auth()->id())->get();
         if ($result){
             Notification::send($user, new PublicArticle($article));
+            PublicArticleEvent::dispatch($article->name);
         }
         return redirect('/');
     }
