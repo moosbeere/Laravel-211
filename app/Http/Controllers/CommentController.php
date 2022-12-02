@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Jobs\VeryLongJob;
+use App\Events\PublicArticleEvent;
 
 
 
@@ -64,7 +65,11 @@ class CommentController extends Controller
         $comment->article()->associate($article); 
         $comment->user()->associate(Auth::id());
         $result = $comment->save();
-        VeryLongJob::dispatch($article, $comment);
+        if ($result){
+            VeryLongJob::dispatch($article, $comment);
+            PublicArticleEvent::dispatch($comment->title);
+        }
+        
         return redirect('/article/show/'.request('id'))->with('result', $result);
         // $comment->title = $request->title;
     }

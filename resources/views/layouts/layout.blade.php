@@ -79,12 +79,15 @@
   </div>
 </nav> 
 <main>
+
 <div id="app">
-  <App/>
+  <App> </App>
           </div>
+
   <div class="container">
     @yield('content')
   </div> 
+
 </main> 
   <footer class="bg-light text-center text-lg-start">
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
