@@ -27,6 +27,6 @@ class Stat extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('stats');
     }
 }

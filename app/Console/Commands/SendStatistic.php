@@ -43,7 +43,7 @@ class SendStatistic extends Command
      */
     public function handle()
     {
-        $countArticle=Stat::whereRaw('`path` LIKE  :name', ['name'=>'%[0-9]'])->count();
+        $countArticle=Stat::whereRaw('`path` GLOB  :name', ['name'=>'*[0-9]'])->count();
         $countComment=Comment::whereDate('created_at', Carbon::today())->count();
         Mail::send(new StatMail($countArticle, $countComment));
     }
