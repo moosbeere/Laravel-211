@@ -47,9 +47,9 @@ class CommentController extends Controller
         $comment->text = request('text');
         $comment->article()->associate($id);
         $comment->user()->associate(Auth::id());
-        $comment->save();
+        $result = $comment->save();
         VeryLongJob::dispatch($article);
-        return redirect('/article/'.$id);
+        return redirect('/article/'.$id.'?result='.$result);
     }
 
     /**

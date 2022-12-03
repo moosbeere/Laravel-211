@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(ArticleSeeder::class);
         Article::factory(10)->has(Comment::factory(3))->create();
         $this->call([
+            UserSeeder::class,
             RoleSeeder::class,
         ]);
     }

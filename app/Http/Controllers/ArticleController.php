@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Comment;
 use App\Notifications\NotifyNewArticle;
 use Illuminate\Support\Facades\Notification;
-
+use App\Events\NewArticleEvent;
 class ArticleController extends Controller
 {
     /**

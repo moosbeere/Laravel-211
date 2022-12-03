@@ -17,15 +17,19 @@ use App\Http\Controllers\CommentController;
 |
 */
 
+//Auth
 Route::get('/auth/registr', [AuthController::class, 'index']);
 Route::post('/auth/registr', [AuthController::class, 'store']);
 Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth/login', [AuthController::class, 'customLogin']);
 Route::get('/auth/logout', [AuthController::class, 'logout']);
 
+//Article
 Route::get('/', [ArticleController::class, 'index']);
-Route::resource('/article', ArticleController::class)->middleware('auth:sanctum');
+Route::resource('/article', ArticleController::class)->middleware(['auth:sanctum','stat']);
 
+
+//Comment
 Route::group(['prefix' => '/comment', 'middleware'=>'auth:sanctum'], function(){
     Route::post('/{id}', [CommentController::class, 'store']);
     Route::get('/{id}', [CommentController::class, 'edit']);
