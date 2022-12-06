@@ -7,6 +7,9 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Events\PublicArticle;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Notifications\PublicArticleNotify;
 use App\Models\User;
 
@@ -19,7 +22,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::latest()->paginate(5);
+        $currentPage = request('page');
+        $articles = Cache::remember('articles:all'.$currentPage, 2000, function(){
+            return Article::latest()->paginate(5);
+        });
         return view('articles.index', ['articles' => $articles]);
     }
 
@@ -41,6 +47,15 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        Cache::forget('articles:all');
+        $caches = DB::table('cache')
+                ->whereRaw('`key` GLOB :name', ['name'=>'*[0-9]'])
+                ->get();
+        foreach($caches as $cache){
+            // Log::alert($cache->key);
+            Cache::forget($cache->key);
+        }
+        
         $request->validate([
             'name' => 'required',
             'annotation' => 'required'
@@ -73,7 +88,9 @@ class ArticleController extends Controller
         if (isset($_GET['notify'])){
             auth()->user()->notifications()->where('id', $_GET['notify'])->first()->markAsRead();
         }
-        $article = Article::FindOrFail($id);
+        $article = Cache::rememberForever('article:'.$id.'_show', function()use($id){
+            return Article::FindOrFail($id);
+        });
         $comments = Comment::where([
                         ['article_id',$id],
                         ['accept', 1]
@@ -112,7 +129,7 @@ class ArticleController extends Controller
         $article->name = request('name');
         $article->shortDesc = request('annotation');
         $article->desc = request('description');
-        $article->save();
+        if ($article->save()) Cache::forget('article:'.$id.'_show');
         return redirect('/articles/'.$id);
         
     }
@@ -125,6 +142,7 @@ class ArticleController extends Controller
      */
 
     public function destroy($id){
+        Cache::flush();
         $article = Article::FindOrFail($id);
         Comment::where('article_id', $id)->delete();
         $article->delete();

@@ -18,6 +18,7 @@ class CommentController extends Controller
      */
     public function index()
     {
+        
         $comments = Comment::where('accept', null)->latest()->paginate(10);
         return view('comments.index', ['comments'=>$comments]);
     }
