@@ -26,7 +26,7 @@ Route::get('/signout', [AuthController::class, 'signout']);
 Route::get('/', [ArticleController::class, 'index']);
 
 //Article
-Route::group(['prefix' => '/article', 'middleware'=>'auth:sanctum'], function(){
+Route::group(['prefix' => '/article', 'middleware'=>['auth:sanctum','task']], function(){
     Route::get('/create', [ArticleController::class, 'create']);
     Route::post('/store', [ArticleController::class, 'store']);
     Route::get('/show/{id}', [ArticleController::class, 'show']);
