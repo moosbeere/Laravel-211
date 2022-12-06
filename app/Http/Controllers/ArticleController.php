@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Comment;
 use App\Notifications\NotifyNewArticle;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use App\Events\NewArticleEvent;
 class ArticleController extends Controller
 {
@@ -18,7 +20,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::latest()->paginate(5);
+        $currentPage = request('page');
+        $articles = Cache::remember('articles:all'.$currentPage, 2000, function(){
+            return Article::latest()->paginate(5);
+        });
         return view('articles.index', ['articles' => $articles]);
     }
 
@@ -40,6 +45,9 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        foreach(DB::raw('SELECT `key`  FROM `cache` GLOB  :name', ['name'=>'*[0-9]']) as $key){
+            Log::info('ok');
+        }
         $request->validate([
             'date' => 'required',
             'title' => 'required',
