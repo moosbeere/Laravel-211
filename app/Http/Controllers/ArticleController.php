@@ -55,7 +55,7 @@ class ArticleController extends Controller
         $result = $article->save();
         $users = User::where('id', '!=', auth()->id())->get();
         if ($result){
-            Notification::send($users, new PublicArticleNotify($article->name));
+            Notification::send($users, new PublicArticleNotify($article));
             PublicArticle::dispatch($article);
         }
         return redirect('/');
