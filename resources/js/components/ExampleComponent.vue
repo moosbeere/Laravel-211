@@ -1,6 +1,6 @@
 <template>
-    <div class="alert alert-primary" role="alert">
-        <strong>{{this.name}}</strong>
+    <div v-show="this.name != null" class="alert alert-primary" role="alert">
+        Добавлена новая статья: <strong>{{this.name}}</strong>
     </div>
     <!-- <div v-show="this.name != null" class="alert alert-primary" role="alert">
        Добавлена новая статья <strong>{{this.name}}</strong>
