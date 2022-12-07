@@ -61,10 +61,12 @@
             @auth
               <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                Уведомления
+                Уведомления <span>{{auth()->user()->unreadNotifications()->count()}}</span>
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
+                @foreach(auth()->user()->unreadNotifications as $notification)
+                  <li><a class="dropdown-item" href="/article/show/{{$notification->data['name']['id']}}?notify={{$notification->id}}">{{$notification->data['name']['name']}}</a></li>
+                @endforeach
               </ul>
             </li>
                 <li class="nav-item">

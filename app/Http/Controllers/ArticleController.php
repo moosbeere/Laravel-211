@@ -42,6 +42,9 @@ class ArticleController extends Controller
     }
 
     public function show($id){
+        if(isset($_GET['notify'])){
+            auth()->user()->notifications()->where('id', $_GET['notify'])->first()->markAsRead();
+        }
         $article = Article::FindOrFail($id);
         $comments=Comment::where([
                             ['article_id', $id],
