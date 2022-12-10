@@ -19471,25 +19471,9 @@ module.exports = {
 /*!*********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Components/App.vue?vue&type=script&lang=js ***!
   \*********************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      name: null
-    };
-  },
-  created: function created() {
-    window.Echo.channel('test').listen('PublicArticleEvent', function (name) {
-      console.log(name);
-    });
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /laravel/Laravel-211/resources/js/Components/App.vue: Unexpected token (9:34)\n\n\u001b[0m \u001b[90m  7 |\u001b[39m             window\u001b[33m.\u001b[39m\u001b[33mEcho\u001b[39m\u001b[33m.\u001b[39mchannel(\u001b[32m'test'\u001b[39m)\u001b[33m.\u001b[39mlisten(\u001b[32m'PublicArticleEvent'\u001b[39m\u001b[33m,\u001b[39m (name)\u001b[33m=>\u001b[39m{\u001b[0m\n\u001b[0m \u001b[90m  8 |\u001b[39m                 \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mname \u001b[33m=\u001b[39m name[\u001b[32m'name'\u001b[39m]\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  9 |\u001b[39m                 console\u001b[33m.\u001b[39mlog(name)\u001b[33m;\u001b[39m\u001b[33m?\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 10 |\u001b[39m             })\u001b[0m\n\u001b[0m \u001b[90m 11 |\u001b[39m         }\u001b[0m\n\u001b[0m \u001b[90m 12 |\u001b[39m     }\u001b[0m\n    at instantiate (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:67:32)\n    at constructor (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:364:12)\n    at Parser.raise (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:3365:19)\n    at Parser.unexpected (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:3398:16)\n    at Parser.parseExprAtom (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11568:22)\n    at Parser.parseExprSubscripts (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11171:23)\n    at Parser.parseUpdate (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11153:21)\n    at Parser.parseMaybeUnary (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11127:23)\n    at Parser.parseMaybeUnaryOrPrivate (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10956:61)\n    at Parser.parseExprOps (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10962:23)\n    at Parser.parseMaybeConditional (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10937:23)\n    at Parser.parseMaybeAssign (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10895:21)\n    at Parser.parseExpressionBase (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10845:23)\n    at /laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10840:39\n    at Parser.allowInAnd (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:12635:16)\n    at Parser.parseExpression (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10840:17)\n    at Parser.parseStatementContent (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:13096:23)\n    at Parser.parseStatementLike (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:12952:17)\n    at Parser.parseStatementListItem (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:12937:17)\n    at Parser.parseBlockOrModuleBlockBody (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:13558:61)\n    at Parser.parseBlockBody (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:13550:10)\n    at Parser.parseBlock (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:13538:10)\n    at Parser.parseFunctionBody (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:12287:24)\n    at Parser.parseArrowExpression (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:12260:10)\n    at Parser.parseParenAndDistinguishExpression (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11829:12)\n    at Parser.parseExprAtom (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11446:23)\n    at Parser.parseExprSubscripts (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11171:23)\n    at Parser.parseUpdate (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11153:21)\n    at Parser.parseMaybeUnary (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11127:23)\n    at Parser.parseMaybeUnaryOrPrivate (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10956:61)\n    at Parser.parseExprOps (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10962:23)\n    at Parser.parseMaybeConditional (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10937:23)\n    at Parser.parseMaybeAssign (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10895:21)\n    at /laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10863:39\n    at Parser.allowInAnd (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:12640:12)\n    at Parser.parseMaybeAssignAllowIn (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10863:17)\n    at Parser.parseExprListItem (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:12380:18)\n    at Parser.parseCallExpressionArguments (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11367:22)\n    at Parser.parseCoverCallAndAsyncArrowHead (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11279:29)\n    at Parser.parseSubscript (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11210:19)\n    at Parser.parseSubscripts (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11184:19)\n    at Parser.parseExprSubscripts (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11175:17)\n    at Parser.parseUpdate (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11153:21)\n    at Parser.parseMaybeUnary (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:11127:23)\n    at Parser.parseMaybeUnaryOrPrivate (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10956:61)\n    at Parser.parseExprOps (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10962:23)\n    at Parser.parseMaybeConditional (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10937:23)\n    at Parser.parseMaybeAssign (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10895:21)\n    at Parser.parseExpressionBase (/laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10845:23)\n    at /laravel/Laravel-211/node_modules/@babel/parser/lib/index.js:10840:39");
 
 /***/ }),
 
@@ -19506,8 +19490,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, " new component vue ");
+var _hoisted_1 = {
+  "class": "alert alert-primary",
+  role: "alert"
+};
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Добавлена новая статья: ");
+function render(_ctx, _cache) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.name), 1 /* TEXT */)], 512 /* NEED_PATCH */)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, this.name != null]]);
 }
 
 /***/ }),

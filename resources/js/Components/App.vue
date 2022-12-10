@@ -1,5 +1,7 @@
 <template>
-    <div> new component vue </div>
+    <div v-show="this.name != null" class="alert alert-primary" role="alert">
+        Добавлена новая статья: <strong>{{this.name}}</strong>
+    </div>
 </template>
 <script>
     export default{
@@ -8,7 +10,8 @@
         },
         created(){
             window.Echo.channel('test').listen('PublicArticleEvent', (name)=>{
-                console.log(name);
+                this.name = name['name'];
+                console.log(name);?
             })
         }
     }
