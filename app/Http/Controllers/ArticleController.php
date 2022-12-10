@@ -6,6 +6,8 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\PublicArticleNotify;
@@ -20,7 +22,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::latest()->paginate(5);
+        $currentPage = request('page');
+        $articles = Cache::remember('articles:all1'.$currentPage, 2000, function(){
+            return Article::latest()->paginate(5);
+        });
         return view('articles.index', ['articles'=>$articles]);
     }
 
@@ -43,6 +48,10 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $caches = DB::table('cache')->whereRaw('`key` GLOB :name', ['name' => 'articles:all*[0-9]'])->get();
+        foreach($caches as $cache){
+            Cache::forget($cache->key);
+        }
         $this->authorize('create', [self::class]);
         
         $request->validate([
@@ -73,15 +82,19 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        
         if(isset($_GET['notify'])){
             
             auth()->user()->notifications()->where('id', $_GET['notify'])->first()->markAsRead();
         }
-        $comments = Comment::whereColumn([
-            ['article_id', $article->id],
-            ['accept', 1]
-            ])->latest()->get();
-        return view('articles.show', ['article'=>$article, 'comments'=>$comments]);        
+        $data = Cache::rememberForever('show:'.$article->id, function()use($article){
+            $comments = Comment::whereColumn([
+                        ['article_id', $article->id],
+                        ['accept', 1]
+                    ])->latest()->get();
+            return ['article'=>$article, 'comments'=>$comments];
+        });
+        return view('articles.show', $data);        
     }
 
     /**
@@ -105,6 +118,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+        Cache::forget(DB::table('cache')->whereRaw('`key` GLOB :name', ['name' => 'show:'.$article->id])->first()->key);
         $this->authorize('update', [self::class, $article]);
         $request->validate([
             'date' => 'date|required',
@@ -128,6 +142,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        Cache::flush();
         $this->authorize('delete', [self::class, $article]);
         Comment::where('article_id', $article->id)->delete();
         $article->delete();

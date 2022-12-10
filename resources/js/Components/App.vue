@@ -11,7 +11,7 @@
         created(){
             window.Echo.channel('test').listen('PublicArticleEvent', (name)=>{
                 this.name = name['name'];
-                console.log(name);?
+                console.log(name);
             })
         }
     }
