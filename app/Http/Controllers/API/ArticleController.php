@@ -98,7 +98,10 @@ class ArticleController extends Controller
                         ['article_id',$id],
                         ['accept', 1]
                     ])->latest()->get();
-        return view('articles.show', ['article'=>$article, 'comments'=>$comments]);
+        
+        return response()->json([
+            'article'=>$article, 'comments'=>$comments
+        ]);
     }
 
     /**
@@ -110,7 +113,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::FindOrFail($id);
-        return view('articles.edit', ['article'=>$article]);
+        return response()->json($article, 201);
     }
 
     /**
@@ -123,17 +126,18 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'date' => 'required|date',
+            'date' => 'required',
             'name' => 'required',
             'annotation' => 'required',
         ]);
         $article = Article::FindOrFail($id);
-        $article->date = request('date');
+        $article->date = $request->date;
         $article->name = request('name');
         $article->shortDesc = request('annotation');
         $article->desc = request('description');
-        if ($article->save()) Cache::forget('article:'.$id.'_show');
-        return redirect('/articles/'.$id);
+        $article->save();
+        // if ($article->save()) Cache::forget('article:'.$id.'_show');
+        return response()->json($article, 201);
         
     }
 
