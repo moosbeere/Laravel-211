@@ -36,6 +36,6 @@ class PublicArticleEvent implements ShouldBroadcast
     }
     public function broadcastWith()
     {
-        return ['name', $this->name];
+        return ['name' => $this->name];
     }
 }

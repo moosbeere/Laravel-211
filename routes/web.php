@@ -25,7 +25,7 @@ Route::get('auth/logout', [AuthController::class, 'logout']);
 
 //Article
 Route::get('/', [ArticleController::class, 'index'])->name('main');
-Route::resource('article', ArticleController::class)->middleware('auth:sanctum');
+Route::resource('article', ArticleController::class)->middleware(['path', 'auth:sanctum']);
 
 //Comment
 Route::group(['prefix'=>'comment', 'middleware'=>'auth:sanctum'], function(){

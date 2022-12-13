@@ -19487,8 +19487,8 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
     window.Echo.channel('test').listen('PublicArticleEvent', function (name) {
-      _this.name = name['name'];
-      console.log(name);
+      _this.name = name;
+      console.log(name['name']);
     });
   }
 });
