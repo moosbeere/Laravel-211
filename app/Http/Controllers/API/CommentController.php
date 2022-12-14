@@ -7,6 +7,7 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Cache;
 use App\Jobs\VeryLongJob;
 use App\Events\PublicArticleEvent;
 use App\Http\Controllers\Controller;
@@ -28,10 +29,12 @@ class CommentController extends Controller
 
     public function accept(Comment $comment){
         $comment->accept = 1;
+        // Cache::forget('article:'.$comment->article_id.'_show');
         return response($comment->save());
     }
     public function reject(Comment $comment){
         $comment->accept = 0;
+        Cache::forget('article:'.$comment->article_id.'_show');
         return response($comment->save());
 
     }

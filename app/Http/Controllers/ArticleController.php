@@ -88,14 +88,15 @@ class ArticleController extends Controller
             auth()->user()->notifications()->where('id', $_GET['notify'])->first()->markAsRead();
         }
         
-        $article = Cache::rememberForever('article:'.$id.'_show', function()use($id){
-            return Article::FindOrFail($id);
-        });
-        $comment = Comment::whereColumn([
-                                ['article_id', $id],
-                                ['accept', 1]
-                            ])->latest()->paginate(4);
-        return view('articles.show', ['article' => $article, 'comments'=>$comment]);
+        $data = Cache::rememberForever('article:'.$id.'_show', function()use($id){
+            $article = Article::FindOrFail($id);
+            $comment = Comment::whereColumn([
+                ['article_id', $id],
+                ['accept', 1]
+            ])->latest()->paginate(4);
+            return ['article'=>$article, 'comments'=>$comment];
+        });        
+        return view('articles.show', $data);
     }
 
     /**
