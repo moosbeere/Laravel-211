@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\User;
 use Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 
 class AuthController extends Controller
 {
     public function create(){
-        return view('auth/registration');
+        // return view('auth/registration');
     }
 
     public function store(Request $request){
@@ -29,12 +30,15 @@ class AuthController extends Controller
             'role_id' => 2,
         ]);
 
-        $user->createToken('myAppToken');
-        return redirect()->route('login');
+        $token = $user->createToken('myAppToken');
+        return response()->json([
+            'user' => $user,
+            'token' => $token
+        ]);
     }
 
     public function login(){
-        return view('auth.signin');
+        // return view('auth.signin');
     }
 
     public function customLogin(Request $request){
@@ -48,18 +52,14 @@ class AuthController extends Controller
             'password'=>request('password'),
         ];
         if(Auth::attempt($credentials)){
-            $request->session()->regenerate();
-            return redirect('/');
+            $token = auth()->user()->createToken('myAppToken');
+            return response($token, 201);
         }
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return response('Bad login, 401');
     }
 
     public function logout(Request $request){
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/');
+        auth()->user()->tokens()->delete();
+        return response('logout');
     }
 }
